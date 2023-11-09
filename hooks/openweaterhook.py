@@ -12,20 +12,22 @@ from airflow.providers.http.hooks.http import HttpHook
 
 
 class OpenWeatherHook(HttpHook, ABC):
-    def __init__(self, municipio: str, carregar_dados: IinfraDados, conn_id: str = None) -> None:
+    def __init__(self, municipio: str, conn_id: str = None) -> None:
         """Class para 
 
         Args:
             municipio (str): _description_
-            carregar_dados (IinfraDados): _description_
             salvar_dados (IinfraDados): _description_
             conn_id (str, optional): _description_. Defaults to None.
         """
         self._municipio = municipio
-        self._carregar_dados = carregar_dados
         self._chave = ''
         self._conn_id = conn_id
         super().__init__(http_conn_id=self._conn_id)
+
+    @abstractmethod
+    def _criar_url(self):
+        pass
 
     def conectar_api(self, url: str,  params: Dict, session) -> requests.models.Response | bool:
         """Método para conectar na API
