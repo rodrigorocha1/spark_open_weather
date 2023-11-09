@@ -21,11 +21,11 @@ class OpenWeatherHook(HttpHook, ABC):
             salvar_dados (IinfraDados): _description_
             conn_id (str, optional): _description_. Defaults to None.
         """
-        self.__municipio = municipio
-        self.__carregar_dados = carregar_dados
-        self.__chave = ''
-        self.__conn_id = conn_id
-        super().__init__(http_conn_id=self.__conn_id)
+        self._municipio = municipio
+        self._carregar_dados = carregar_dados
+        self._chave = ''
+        self._conn_id = conn_id
+        super().__init__(http_conn_id=self._conn_id)
 
     def conectar_api(self, url: str,  params: Dict, session) -> requests.models.Response | bool:
         """Método para conectar na API
