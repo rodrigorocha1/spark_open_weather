@@ -6,9 +6,8 @@ except ModuleNotFoundError:
     pass
 from typing import Dict
 import requests
-from src.dados.iinfra_dados import IinfraDados
-from abc import ABC, abstractmethod
 from airflow.providers.http.hooks.http import HttpHook
+from abc import ABC, abstractmethod
 
 
 class OpenWeatherHook(HttpHook, ABC):
