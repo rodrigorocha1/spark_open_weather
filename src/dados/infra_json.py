@@ -6,6 +6,15 @@ import os
 class InfraJson(InfraDados):
 
     def __init__(self, diretorio_datalake: str, path_extracao: str, municipio: str, metricas: str, nome_arquivo: str) -> None:
+        """Classe para salvar a requisição
+
+        Args:
+            diretorio_datalake (str): prata, bronze, outro
+            path_extracao (str): path de extracao ex: extracao_dia
+            municipio (str): municipio
+            metricas (str): metricas
+            nome_arquivo (str): nome do arquivo
+        """
         super().__init__(diretorio_datalake, path_extracao, municipio, metricas, nome_arquivo)
 
     def __verificar_diretorio(self):
