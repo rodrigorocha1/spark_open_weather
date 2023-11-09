@@ -1,4 +1,3 @@
-from typing import Any
 from hooks.openweaterhook import OpenWeatherHook
 from src.dados.iinfra_dados import IinfraDados
 
