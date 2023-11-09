@@ -4,8 +4,8 @@ from src.dados.iinfra_dados import IinfraDados
 
 class TempoAgoraHook(OpenWeatherHook):
 
-    def __init__(self, municipio: str, carregar_dados: IinfraDados, conn_id: str = None) -> None:
-        super().__init__(municipio, carregar_dados, conn_id)
+    def __init__(self, municipio: str, conn_id: str = None) -> None:
+        super().__init__(municipio, conn_id)
 
     def _criar_url(self):
         return 'https://api.openweathermap.org/data/2.5/weather'

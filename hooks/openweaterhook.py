@@ -45,3 +45,7 @@ class OpenWeatherHook(HttpHook, ABC):
 
         except:
             return False
+
+    @abstractmethod
+    def run(self):
+        pass
