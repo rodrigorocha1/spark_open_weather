@@ -1,5 +1,5 @@
+import os
 from hooks.openweaterhook import OpenWeatherHook
-from src.dados.iinfra_dados import IinfraDados
 
 
 class TempoAgoraHook(OpenWeatherHook):
@@ -14,7 +14,7 @@ class TempoAgoraHook(OpenWeatherHook):
         session = self.get_conn()
         url = self._criar_url()
         params = {
-            'appid': '',
+            'appid': os.environ['key'],
             'units': 'metric',
             'lang': 'pt_br',
             'q': self._municipio

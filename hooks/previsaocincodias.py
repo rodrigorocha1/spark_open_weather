@@ -1,4 +1,5 @@
 from hooks.openweaterhook import OpenWeatherHook
+import os
 
 
 class PrevisaoCincoDiasHook(OpenWeatherHook):
@@ -14,7 +15,7 @@ class PrevisaoCincoDiasHook(OpenWeatherHook):
         url = self._criar_url()
         params = {
             'q': self._municipio,
-            'appid': '',
+            'appid': os.environ['key'],
             'units': 'metric',
             'lang': 'pt_br'
         }

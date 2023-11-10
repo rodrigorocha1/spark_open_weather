@@ -59,7 +59,7 @@ docs/_build/
 
 # PyBuilder
 target/
-
+.mypy_cache
 # DotEnv configuration
 .env
 
