@@ -6,22 +6,19 @@ from src.dados.iinfra_dados import IinfraDados
 
 class TempoAgoraOperator(OpenWeatherOperator):
 
-    template_fields = [
-        'camada_data_lake',
-        'path_extracao',
+    ttemplate_fields = [
         'municipio',
-        'metricas',
-        'caminho_save_arquivos'
+        'caminho_save_arquivos',
         'extracao'
     ]
 
     def __init__(
-            self, camada_data_lake: str, path_extracao: str,
-            municipio: str, metricas: str,
-            caminho_save_arquivos: IinfraDados, extracao: OpenWeatherHook, **kwargs
+            self,
+            municipio: str,
+            caminho_save_arquivos: IinfraDados,
+            extracao: OpenWeatherHook, **kwargs
     ):
-        super().__init__(camada_data_lake, path_extracao, municipio,
-                         metricas, caminho_save_arquivos, extracao, **kwargs)
+        super().__init__(municipio, caminho_save_arquivos, extracao, **kwargs)
 
     def execute(self, context):
         for json_reponse in self._extracao.run():
