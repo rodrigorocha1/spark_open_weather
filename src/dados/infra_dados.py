@@ -27,4 +27,4 @@ class InfraDados(IinfraDados):
         self._metricas = metricas
         self._nome_arquivo = nome_arquivo
         self._diretorio_completo = os.path.join(
-            diretorio_datalake, path_extracao, municipio, metricas)
+            diretorio_datalake, path_extracao, municipio, metricas, nome_arquivo)
