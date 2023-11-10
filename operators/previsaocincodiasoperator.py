@@ -1,8 +1,7 @@
 from typing import Dict
-from hooks.openweaterhook import OpenWeatherHook
+from hooks.tempo_agora_hook import TempoAgoraHook
 from operators.openweatheroperator import OpenWeatherOperator
 from src.dados.iinfra_dados import IinfraDados
-
 
 
 class PrevisaoCincoDiasOperator(OpenWeatherOperator):
@@ -23,7 +22,7 @@ class PrevisaoCincoDiasOperator(OpenWeatherOperator):
 
 if __name__ == '__main__':
 
-    from airflow.models import DAG
+    from airflow.models import DAG, TaskInstance
     from datetime import datetime
     from src.dados.infra_json import InfraJson
 
@@ -32,6 +31,17 @@ if __name__ == '__main__':
     with DAG(dag_id='tempo_agora_teste', start_date=datetime.now()) as dag:
         to = PrevisaoCincoDiasOperator(
             municipio=municipio,
-            metricas=
-
+            caminho_save_arquivos=InfraJson(
+                diretorio_datalake='bronze',
+                path_extracao='extracao_dia_2023_11_09',
+                municipio=municipio,
+                nome_arquivo='req_temp_atual',
+                metricas='previsao_atual'
+            ),
+            extracao=TempoAgoraHook(
+                municipio=municipio,
+                conn_id='id_ribeirao_preto'
+            )
         )
+        ti = TaskInstance(task=to)
+        to.execute(ti.task_id)
