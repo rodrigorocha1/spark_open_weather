@@ -28,5 +28,4 @@ class PrevisaoCincoDiasOperator(OpenWeatherOperator):
         )
 
     def execute(self, context):
-        for json_reponse in self._extracao.run():
-            self.gravar_dados(json_reponse)
+        self.gravar_dados(self._extracao.run())
