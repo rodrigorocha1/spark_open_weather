@@ -15,7 +15,7 @@ class PrevisaoCincoDiasHook(OpenWeatherHook):
         url = self._criar_url()
         params = {
             'q': self._municipio,
-            'appid': os.environ['key'],
+            'appid': self._chave,
             'units': 'metric',
             'lang': 'pt_br'
         }

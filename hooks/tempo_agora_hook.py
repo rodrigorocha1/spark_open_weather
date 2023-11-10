@@ -14,11 +14,11 @@ class TempoAgoraHook(OpenWeatherHook):
         session = self.get_conn()
         url = self._criar_url()
         params = {
-            'appid': os.environ['key'],
+            'appid': self._chave,
             'units': 'metric',
             'lang': 'pt_br',
             'q': self._municipio
         }
 
         response = self.conectar_api(url=url, params=params, session=session)
-        return response
+        return response.json()

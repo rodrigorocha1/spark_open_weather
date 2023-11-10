@@ -1,3 +1,4 @@
+
 import json
 from src.dados.infra_dados import InfraDados
 import os
@@ -23,8 +24,14 @@ class InfraJson(InfraDados):
 
     def salvar_dados(self, **kargs):
         self.__verificar_diretorio()
-        with open(os.path.join(self._diretorio_completo, self._nome_arquivo), 'a') as arquivo_json:
-            json.dump(kargs['req'], arquivo_json, ensure_ascii=False)
+        caminho_completo = os.path.join(
+            self._diretorio_completo, self._nome_arquivo
+        )
+        with open(caminho_completo, 'a') as arquivo_json:
+            json.dump(
+                kargs['req'],
+                arquivo_json, ensure_ascii=False
+            )
             arquivo_json.write('\n')
 
     def carregar_dados(self):
