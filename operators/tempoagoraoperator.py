@@ -4,7 +4,6 @@ try:
     sys.path.insert(0, os.path.abspath(os.curdir))
 except:
     pass
-from typing import Dict
 from hooks.openweaterhook import OpenWeatherHook
 from operators.openweatheroperator import OpenWeatherOperator
 from src.dados.iinfra_dados import IinfraDados
