@@ -1,5 +1,5 @@
 from hooks.openweaterhook import OpenWeatherHook
-import os
+from airflow.models import Variable
 
 
 class PrevisaoCincoDiasHook(OpenWeatherHook):
@@ -15,7 +15,7 @@ class PrevisaoCincoDiasHook(OpenWeatherHook):
         url = self._criar_url()
         params = {
             'q': self._municipio,
-            'appid': self._chave,
+            'appid': Variable.get('CHAVE_API_OPENWEATER'),
             'units': 'metric',
             'lang': 'pt_br'
         }

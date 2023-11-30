@@ -7,6 +7,7 @@ except ModuleNotFoundError:
 from typing import Dict
 import requests
 from airflow.providers.http.hooks.http import HttpHook
+from airflow.models import Variable
 from abc import ABC, abstractmethod
 
 
@@ -20,7 +21,7 @@ class OpenWeatherHook(HttpHook, ABC):
             conn_id (str, optional): _description_. Defaults to None.
         """
         self._municipio = municipio
-        self._chave = os.environ['key']
+        self._chave = Variable.get('CHAVE_API_OPENWEATER')
         self._conn_id = conn_id
         super().__init__(http_conn_id=self._conn_id)
 
