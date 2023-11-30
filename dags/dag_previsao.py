@@ -8,8 +8,6 @@ from municipios_sp.municipios_sp import obter_municipio_sp
 from airflow.models import DAG
 from airflow.utils.task_group import TaskGroup
 from airflow.operators.empty import EmptyOperator
-from operators.tempoagoraoperator import TempoAgoraOperator
-from hooks.tempo_agora_hook import TempoAgoraHook
 from hooks.previsaocincodias import PrevisaoCincoDiasHook
 from operators.previsaocincodiasoperator import PrevisaoCincoDiasOperator
 from src.dados.infra_json import InfraJson
