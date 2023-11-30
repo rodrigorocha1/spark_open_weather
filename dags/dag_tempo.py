@@ -36,18 +36,19 @@ with DAG(
     with TaskGroup('task_tempo_municipios_sp', dag=dag, ) as tg_mun:
         lista_task_tempo = []
         for municipio in obter_municipio_sp():
-            extraca_api_tempo = TempoAgoraOperator(
-                task_id=f'municipio_{municipio[0]}',
+            extraca_api_tempo = PrevisaoCincoDiasOperator(
+                task_id=f'id_previsao_{municipio[0]}',
                 municipio=municipio[1],
                 caminho_save_arquivos=InfraJson(
                     diretorio_datalake='bronze',
-                    path_extracao=f'extracao_dia_{data_atual}',
-                    municipio=municipio[1],
-                    nome_arquivo='req_temp_atual.json',
-                    metricas='previsao_agora'
+                    path_extracao='extracao_dia_2023_11_09',
+                    nome_arquivo=f'req_temp_atual_{municipio[0]}.json',
+                    metricas='previsao_atual'
                 ),
-                extracao=TempoAgoraHook(
+                extracao=PrevisaoCincoDiasHook(
                     municipio=municipio[1],
+
+
                 )
             )
             lista_task_tempo.append(extraca_api_tempo)

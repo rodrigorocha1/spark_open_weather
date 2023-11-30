@@ -21,8 +21,7 @@ class OpenWeatherHook(HttpHook, ABC):
             conn_id (str, optional): _description_. Defaults to None.
         """
         self._municipio = municipio
-        # Variable.get('CHAVE_API_OPENWEATER')
-        self._chave = '7af9cdb005f414c751bd9d3170e72a97'
+        self._chave =  'cee8f805d2d60045493ed7ea1353c899' #Variable.get('CHAVE_API_OPENWEATER')
         self._conn_id = conn_id
         super().__init__(http_conn_id=self._conn_id)
 

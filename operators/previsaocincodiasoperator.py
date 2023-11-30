@@ -4,8 +4,6 @@ try:
     sys.path.insert(0, os.path.abspath(os.curdir))
 except:
     pass
-from typing import Dict
-from hooks.tempo_agora_hook import TempoAgoraHook
 from operators.openweatheroperator import OpenWeatherOperator
 from hooks.openweaterhook import OpenWeatherHook
 from src.dados.iinfra_dados import IinfraDados
@@ -48,8 +46,7 @@ if __name__ == '__main__':
                 caminho_save_arquivos=InfraJson(
                     diretorio_datalake='bronze',
                     path_extracao='extracao_dia_2023_11_09',
-                    municipio=municipio[1],
-                    nome_arquivo='req_temp_atual.json',
+                    nome_arquivo=f'req_temp_atual_{municipio[0]}.json',
                     metricas='previsao_atual'
                 ),
                 extracao=PrevisaoCincoDiasHook(
