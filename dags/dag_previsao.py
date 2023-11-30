@@ -22,7 +22,7 @@ data_atual = data_atual.strftime('%Y-%m-%d')
 
 
 with DAG(
-    dag_id='dag_extracao_tempo',
+    dag_id='dag_previsao_tempo',
     schedule_interval=None,
     catchup=False,
     start_date=pendulum.datetime(2023, 11, 29, tz='America/Sao_Paulo')
@@ -33,24 +33,24 @@ with DAG(
         dag=dag
     )
 
-    with TaskGroup('task_tempo_atual', dag=dag) as tg_mun:
-        lista_task_tempo_atual = []
+    with TaskGroup('task_previsao_cinco_dias', dag=dag, ) as tg_mun:
+        lista_task_previsao = []
         for municipio in obter_municipio_sp():
-            extracao_previsao = TempoAgoraOperator(
+            extraca_api_tempo = PrevisaoCincoDiasOperator(
                 task_id=f'id_previsao_{municipio[0]}',
                 municipio=municipio[1],
                 caminho_save_arquivos=InfraJson(
                     diretorio_datalake='bronze',
                     path_extracao=f'extracao_dia_{data_atual}',
                     nome_arquivo=f'req_temp_atual_{municipio[0]}.json',
-                    metricas='tempo_atual'
+                    metricas='previsao_atual'
                 ),
-                extracao=TempoAgoraHook(
+                extracao=PrevisaoCincoDiasHook(
                     municipio=municipio[1],
 
                 )
             )
-            lista_task_tempo_atual.append(extracao_previsao)
+            lista_task_previsao.append(extraca_api_tempo)
 
     task_fim = EmptyOperator(
         task_id='task_fim_dag',
