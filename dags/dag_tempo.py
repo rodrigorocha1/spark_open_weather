@@ -31,7 +31,7 @@ with DAG(
         dag=dag
     )
 
-    with TaskGroup('task_tempo_municipios_sp', dag=dag) as tg_mun:
+    with TaskGroup('task_tempo_municipios_sp', dag=dag, ) as tg_mun:
         lista_task_tempo = []
         for municipio in obter_municipio_sp():
             extraca_api_tempo = TempoAgoraOperator(
@@ -46,16 +46,14 @@ with DAG(
                 ),
                 extracao=TempoAgoraHook(
                     municipio=municipio[1],
-
-
                 )
             )
-
             lista_task_tempo.append(extraca_api_tempo)
 
     task_fim = EmptyOperator(
         task_id='task_fim_dag',
-        dag=dag
+        dag=dag,
+        trigger_rule='all_done'
     )
 
     task_inicio >> tg_mun >> task_fim
