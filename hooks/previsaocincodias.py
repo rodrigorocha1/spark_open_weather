@@ -15,9 +15,10 @@ class PrevisaoCincoDiasHook(OpenWeatherHook):
         url = self._criar_url()
         params = {
             'q': self._municipio,
-            'appid': Variable.get('CHAVE_API_OPENWEATER'),
+            # Variable.get('CHAVE_API_OPENWEATER'),
+            'appid': '7af9cdb005f414c751bd9d3170e72a97',
             'units': 'metric',
             'lang': 'pt_br'
         }
         response = self.conectar_api(url=url, session=session, params=params)
-        return response
+        return response.json()

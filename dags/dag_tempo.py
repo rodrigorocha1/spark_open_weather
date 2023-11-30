@@ -10,6 +10,8 @@ from airflow.utils.task_group import TaskGroup
 from airflow.operators.empty import EmptyOperator
 from operators.tempoagoraoperator import TempoAgoraOperator
 from hooks.tempo_agora_hook import TempoAgoraHook
+from hooks.previsaocincodias import PrevisaoCincoDiasHook
+from operators.previsaocincodiasoperator import PrevisaoCincoDiasOperator
 from src.dados.infra_json import InfraJson
 import pendulum
 
@@ -31,24 +33,43 @@ with DAG(
         dag=dag
     )
 
-    with TaskGroup('task_tempo_municipios_sp', dag=dag, ) as tg_mun:
-        lista_task_tempo = []
+    # with TaskGroup('task_tempo_municipios_sp', dag=dag, ) as tg_mun:
+    #     lista_task_tempo = []
+    #     for municipio in obter_municipio_sp():
+    #         extraca_api_tempo = TempoAgoraOperator(
+    #             task_id=f'municipio_{municipio[0]}',
+    #             municipio=municipio[1],
+    #             caminho_save_arquivos=InfraJson(
+    #                 diretorio_datalake='bronze',
+    #                 path_extracao=f'extracao_dia_{data_atual}',
+    #                 municipio=municipio[1],
+    #                 nome_arquivo='req_temp_atual.json',
+    #                 metricas='previsao_atual'
+    #             ),
+    #             extracao=TempoAgoraHook(
+    #                 municipio=municipio[1],
+    #             )
+    #         )
+    #         lista_task_tempo.append(extraca_api_tempo)
+
+    with TaskGroup('task_previsao_cinco_dias', dag=dag) as tg_mun:
+        lista_task_previsao = []
         for municipio in obter_municipio_sp():
-            extraca_api_tempo = TempoAgoraOperator(
-                task_id=f'municipio_{municipio[0]}',
+            extracao_previsao = PrevisaoCincoDiasOperator(
+                task_id=f'previsao_municipio_{municipio[0]}',
                 municipio=municipio[1],
                 caminho_save_arquivos=InfraJson(
                     diretorio_datalake='bronze',
                     path_extracao=f'extracao_dia_{data_atual}',
                     municipio=municipio[1],
-                    nome_arquivo='req_temp_atual.json',
-                    metricas='previsao_atual'
+                    metricas='previsao_cinco_dias',
+                    nome_arquivo='req_previsao.json'
                 ),
-                extracao=TempoAgoraHook(
-                    municipio=municipio[1],
+                extracao=PrevisaoCincoDiasHook(
+                    municipio=municipio[1]
                 )
             )
-            lista_task_tempo.append(extraca_api_tempo)
+            lista_task_previsao.append(extracao_previsao)
 
     task_fim = EmptyOperator(
         task_id='task_fim_dag',
