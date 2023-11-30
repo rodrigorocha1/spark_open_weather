@@ -44,7 +44,7 @@ with DAG(
                     path_extracao=f'extracao_dia_{data_atual}',
                     municipio=municipio[1],
                     nome_arquivo='req_temp_atual.json',
-                    metricas='previsao_atual'
+                    metricas='tempo_atual'
                 ),
                 extracao=TempoAgoraHook(
                     municipio=municipio[1],
