@@ -13,7 +13,7 @@ from src.dados.iinfra_dados import IinfraDados
 
 class PrevisaoCincoDiasOperator(OpenWeatherOperator):
 
-    template_fields = [
+    ttemplate_fields = [
         'municipio',
         'caminho_save_arquivos',
         'extracao'
@@ -43,8 +43,8 @@ if __name__ == '__main__':
     with DAG(dag_id='tempo_agora_teste', start_date=datetime.now()) as dag:
         for municipio in municipios:
             to = PrevisaoCincoDiasOperator(
-                task_id="test_run",
-                municipio=municipio[0],
+                task_id=f'id_previsao_{municipio[0]}',
+                municipio=municipio[1],
                 caminho_save_arquivos=InfraJson(
                     diretorio_datalake='bronze',
                     path_extracao='extracao_dia_2023_11_09',
