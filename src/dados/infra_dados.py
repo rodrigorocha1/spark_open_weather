@@ -32,8 +32,8 @@ class InfraDados(IinfraDados):
             self._diretorio_base,
             self.__data,
             self._diretorio_datalake,
-            self._path_extracao,
             self._municipio,
+            self._path_extracao,
             self._metricas,
             self._nome_arquivo
         )
