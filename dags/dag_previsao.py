@@ -40,7 +40,7 @@ with DAG(
                 caminho_save_arquivos=InfraJson(
                     diretorio_datalake='bronze',
                     path_extracao=f'extracao_dia_{data_atual}',
-                    nome_arquivo=f'req_temp_atual_{municipio[0]}.json',
+                    nome_arquivo=f'req_previsao_{municipio[0]}.json',
                     metricas='previsao_atual'
                 ),
                 extracao=PrevisaoCincoDiasHook(
