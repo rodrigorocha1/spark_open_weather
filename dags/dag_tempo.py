@@ -21,7 +21,7 @@ data_atual = data_atual.strftime('%Y-%m-%d')
 
 with DAG(
     dag_id='dag_extracao_tempo',
-    schedule_interval=None,
+    schedule_interval='*/30 * * * *',
     catchup=False,
     start_date=pendulum.datetime(2023, 11, 29, tz='America/Sao_Paulo')
 ) as dag:
