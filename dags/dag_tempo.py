@@ -56,4 +56,4 @@ with DAG(
         trigger_rule='all_done'
     )
 
-    task_inicio >> tg_mun >> task_fim
+    task_inicio >> tg_mun
